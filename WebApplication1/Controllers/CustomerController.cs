@@ -31,12 +31,15 @@ namespace WebApplication1.Controllers
 
 
         [HttpPost]
-        public ActionResult Register(AddCustomer form) { 
-        var name = form.Name;
-            var email = form.Email;
-            customers.Add(new Customer {  Id = 1, Name = name, Email = email });
-            return RedirectToAction("Index");
-        
+        public ActionResult Register(AddCustomer form) {
+            if (ModelState.IsValid)
+            {
+                var name = form.Name;
+                var email = form.Email;
+                customers.Add(new Customer { Id = 1, Name = name, Email = email });
+                return RedirectToAction("Index");
+            }
+            return View(form);
         
         }
     }
